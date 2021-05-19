@@ -1,0 +1,83 @@
+# local files #
+datasets/*.pkl
+# Sphinx and mkdoc documentation #
+docs/_build/
+maindocs/_build/
+/site
+# Logs and databases #
+*.log
+# IntelliJ Pycharm project files #
+*.iml
+*.iws
+*.ipr
+.idea/
+# R Langugage
+*.RData
+*.Rhistory
+*.RProject
+*.Rproj
+*.RProj.*
+.Rproj.user # for some reason needed.
+# Python #
+.ipynb_checkpoints
+*.pyc
+*.pyo
+__pycache__/
+*__pycache__/
+local_settings.py
+*.sqlite3
+# Python Packaging etc. #
+# might be necessary later on
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+env/
+env
+ENV/
+lib/
+lib64/
+parts/
+*.manifest
+*.spec
+sdist/
+var/
+.venv
+venv/
+*.egg-info/
+.installed.cfg
+*.egg
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+# Unit test / coverage reports #
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+cache/
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+# Flask stuff: #
+instance/
+.webassets-cache
+# Scrapy stuff: #
+.scrapy
+# OS generated files #
+.vscode
+*.vscode*
+.DS_Store?
+ehthumbs.db
+Icon?
+Thumbs.db
+.Rproj.user
+.httr-oauth
+.DS_Store
+*.db
+*/migrations/
