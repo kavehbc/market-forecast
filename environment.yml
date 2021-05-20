@@ -1,9 +1,9 @@
-name: ds-seasonality
+name: stocks
 channels:
   - defaults
   - conda-forge
 dependencies:
-  - python=3.8
+  - python=3.9
   - pandas
   - numpy
   - matplotlib
