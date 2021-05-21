@@ -1,26 +1,9 @@
 import streamlit as st
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_agg import RendererAgg
 import yfinance as yf
-
-PERIODS = {"1d": "1 day", "5d": "5 days", "1mo": "1 month", "3mo": "3 months", "6mo": "6 months",
-           "1y": "1 year", "2y": "2 years", "5y": "5 years", "10y": "10 years",
-           "ytd": "year today", "max": "Max"}
-INTERVALS = {"1m": "1 minute", "2m": "2 minutes", "5m": "5 minutes", "15m": "15 minutes",
-             "30m": "30 minutes", "60m": "60 minutes", "90m": "90 minutes",
-             "1h": "1 hour", "1d": "1 day", "5d": "5 days", "1wk": "1 week",
-             "1mo": "1 month", "3mo": "3 months"}
-TICKER_TYPE = ["Crypto", "Stock"]
-CURRENCIES = ["USD", "EUR", "CAD", "GBP", "AUD", "JPY", "KRW", "RUB"]
-CRYPTOS = {"BTC": "Bitcoin", "ETH": "Ethereum", "BNB": "BinanceCoin", "USDT": "Tether",
-           "ADA": "Cardano", "XRP": "XRP", "DOGE": "DogeCoin", "DOT1": "Polkadot", "BCH": "BitcoinCash",
-           "UNI3": "Uniswap", "USDC": "USDCoin", "LTC": "Litecoin", "LINK": "Chainlink", "SOL1": "Solana",
-           "XLM": "Stellar", "MATIC": "MaticNetwork", "HEX": "HEX", "ETC": "EthereumClassic",
-           "VET": "VeChain", "THETA": "THETA", "TRX": "TRON", "FIL": "FilecoinFutures", "EOS": "EOS",
-           "AAVE": "Aave", "XMR": "Monero", "NEO": "NEO", "LUNA1": "Terra", "MKR": "Maker",
-           "MIOTA": "IOTA", "BSV": "BitcoinSV", "XTZ": "Tezos", "KSM": "Kusama", "CRO": "CryptocomCoin",
-           "ATOM1": "Cosmos", "ALGO": "Algorand", "AVAX": "Avalanche", "BTT1": "BitTorrent", "COMP": "Compound",
-           "WAVES": "Waves", "CTC1": "Creditcoin", "DASH": "Dash", "HBAR": "HederaHashgraph",
-           "ZEC": "Zcash", "XEM": "NEM", "SNX": "SynthetixNetworkToken", "EGLD": "Elrond",
-           "SUSHI": "Sushi", "CHZ": "Chiliz", "DCR": "Decred", "YFI": "yearnfinance"}
+from fbprophet import Prophet
+from libs.constants import *
 
 
 def main():
@@ -53,8 +36,31 @@ def main():
     df_history = yf_ticker.history(period=st_period, interval=st_interval)
     if df_history is not None:
         df_history_desc = df_history.sort_index(ascending=False)
+
         st.subheader("History")
         st.write(df_history_desc)
+
+        # data preparation
+        df_history_prep = df_history.reset_index()
+        data = df_history_prep[["Date", "Close"]]  # select Date and Price
+        data = data.rename(columns={"Date": "ds", "Close": "y"})
+        st.write(data)
+
+        # data training
+        m = Prophet(daily_seasonality=True)  # the Prophet class (model)
+        m.fit(data)  # fit the model using all dat
+
+        # plot the result
+        _lock = RendererAgg.lock
+        with _lock:
+            future = m.make_future_dataframe(periods=365)  # we need to specify the number of days in future
+            prediction = m.predict(future)
+            m.plot(prediction)
+            plt.title("Prediction")
+            plt.xlabel("Date")
+            plt.ylabel("Close Price")
+            # plt.show()
+            st.pyplot(plt)
 
 
 if __name__ == '__main__':

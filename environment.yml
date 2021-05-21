@@ -13,3 +13,4 @@ dependencies:
   - pip:
       - streamlit
       - yfinance
+      - fbprophet

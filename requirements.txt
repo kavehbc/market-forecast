@@ -1,3 +1,5 @@
 pandas
 streamlit
+matplotlib
 yfinance
+fbprophet
