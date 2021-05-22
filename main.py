@@ -3,7 +3,50 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_agg import RendererAgg
 import yfinance as yf
 from fbprophet import Prophet
+
+from contextlib import contextmanager
+from io import StringIO
+from streamlit.report_thread import REPORT_CONTEXT_ATTR_NAME
+from threading import current_thread
+import sys
+
 from libs.constants import *
+
+
+@contextmanager
+def st_redirect(src, dst):
+    placeholder = st.empty()
+    output_func = getattr(placeholder, dst)
+
+    with StringIO() as buffer:
+        old_write = src.write
+
+        def new_write(b):
+            if getattr(current_thread(), REPORT_CONTEXT_ATTR_NAME, None):
+                buffer.write(b + '')
+                output_func(buffer.getvalue() + '')
+            else:
+                old_write(b)
+
+        try:
+            src.write = new_write
+            yield
+        finally:
+            src.write = old_write
+
+
+@contextmanager
+def st_stdout(dst):
+    "this will show the prints"
+    with st_redirect(sys.stdout, dst):
+        yield
+
+
+@contextmanager
+def st_stderr(dst):
+    "This will show the logging"
+    with st_redirect(sys.stderr, dst):
+        yield
 
 
 def main():
@@ -21,6 +64,7 @@ def main():
                                      format_func=lambda x: PERIODS[x])
     st_interval = st.sidebar.selectbox("Interval", options=list(INTERVALS.keys()), index=8,
                                        format_func=lambda x: INTERVALS[x])
+    st_future_days = st.sidebar.number_input("Future Days", value=365, min_value=1, step=1)
 
     st.subheader(st_ticker_name)
     yf_ticker = yf.Ticker(st_ticker_name)
@@ -44,17 +88,22 @@ def main():
         df_history_prep = df_history.reset_index()
         data = df_history_prep[["Date", "Close"]]  # select Date and Price
         data = data.rename(columns={"Date": "ds", "Close": "y"})
-        st.write(data)
 
         # data training
-        m = Prophet(daily_seasonality=True)  # the Prophet class (model)
-        m.fit(data)  # fit the model using all dat
+        m = Prophet(daily_seasonality=True)
+        m.fit(data)
+
+        # predicting the future
+        future = m.make_future_dataframe(periods=st_future_days)  # we need to specify the number of days in future
+        prediction = m.predict(future)
+        st.subheader("Prediction")
+        st.write(prediction)
 
         # plot the result
+        st.subheader("Visualization")
+
         _lock = RendererAgg.lock
         with _lock:
-            future = m.make_future_dataframe(periods=365)  # we need to specify the number of days in future
-            prediction = m.predict(future)
             m.plot(prediction)
             plt.title("Prediction")
             plt.xlabel("Date")
@@ -65,4 +114,5 @@ def main():
 
 if __name__ == '__main__':
     st.set_page_config("Ticker Analysis")
-    main()
+    with st_stdout("code"), st_stderr("error"):
+        main()

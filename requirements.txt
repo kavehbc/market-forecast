@@ -1,3 +1,4 @@
+Cython
 pandas
 streamlit
 matplotlib

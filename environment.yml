@@ -4,6 +4,7 @@ channels:
   - conda-forge
 dependencies:
   - python=3.9
+  - fbprophet
   - pandas
   - numpy
   - matplotlib
@@ -13,4 +14,3 @@ dependencies:
   - pip:
       - streamlit
       - yfinance
-      - fbprophet
