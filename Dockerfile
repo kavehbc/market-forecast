@@ -2,7 +2,7 @@
 # docker save -o market-analyzer.tar market-analyzer
 # docker load --input market-analyzer.tar
 
-FROM continuumio/miniconda3:4.9.2-alpine
+FROM continuumio/miniconda3
 RUN conda update -n base -c defaults conda
 RUN conda install -c conda-forge fbprophet
 RUN conda install -c anaconda pip
