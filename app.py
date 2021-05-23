@@ -3,50 +3,7 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_agg import RendererAgg
 import yfinance as yf
 from fbprophet import Prophet
-
-from contextlib import contextmanager
-from io import StringIO
-from streamlit.report_thread import REPORT_CONTEXT_ATTR_NAME
-from threading import current_thread
-import sys
-
 from libs.constants import *
-
-
-@contextmanager
-def st_redirect(src, dst):
-    placeholder = st.empty()
-    output_func = getattr(placeholder, dst)
-
-    with StringIO() as buffer:
-        old_write = src.write
-
-        def new_write(b):
-            if getattr(current_thread(), REPORT_CONTEXT_ATTR_NAME, None):
-                buffer.write(b + '')
-                output_func(buffer.getvalue() + '')
-            else:
-                old_write(b)
-
-        try:
-            src.write = new_write
-            yield
-        finally:
-            src.write = old_write
-
-
-@contextmanager
-def st_stdout(dst):
-    "this will show the prints"
-    with st_redirect(sys.stdout, dst):
-        yield
-
-
-@contextmanager
-def st_stderr(dst):
-    "This will show the logging"
-    with st_redirect(sys.stderr, dst):
-        yield
 
 
 def main():
@@ -114,5 +71,4 @@ def main():
 
 if __name__ == '__main__':
     st.set_page_config("Ticker Analysis")
-    with st_stdout("code"), st_stderr("error"):
-        main()
+    main()

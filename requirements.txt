@@ -1,5 +1,4 @@
+cython
 fbprophet
-pandas
 streamlit
-matplotlib
 yfinance
