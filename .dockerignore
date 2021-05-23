@@ -1,6 +1,5 @@
-# local files #
-datasets/*.pkl
 *.tar
+datasets/*.pkl
 # Sphinx and mkdoc documentation #
 docs/_build/
 maindocs/_build/

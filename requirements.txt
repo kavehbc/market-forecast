@@ -1,4 +1,2 @@
-cython
-fbprophet
 streamlit
 yfinance
