@@ -8,7 +8,10 @@ from libs.constants import *
 
 def main():
     st.title("Ticker Analysis")
+    st.warning("**Warning:** This tool neither recommends nor guarantees the performance of the given ticker. "
+               "Use this tool and its forecasts at your own risk.")
     st.caption("Data is extracted from Yahoo! Finance")
+
     st_crypto_stock = st.sidebar.radio("Ticker Type", options=TICKER_TYPE)
     if st_crypto_stock == TICKER_TYPE[0]:
         st_crypto_name = st.sidebar.selectbox("Crypto Ticker", options=list(CRYPTOS.keys()),
