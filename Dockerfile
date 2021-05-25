@@ -32,10 +32,11 @@ RUN /venv/bin/conda-unpack
 
 # The runtime-stage image
 FROM debian:buster AS runtime
-LABEL version="1.0"
-LABEL developer="Kaveh Bakhtiyari"
-LABEL website="http://bakhtiyari.com"
-LABEL description="Crypto and Stocks Market Analyzer"
+LABEL version="1.0.0"
+LABEL maintainer="Kaveh Bakhtiyari"
+LABEL url="http://bakhtiyari.com"
+LABEL vcs-url="https://github.com/kavehbc/market-analyzer"
+LABEL description="Cryptocurrency and Stocks Exchange Market Technical Analysis"
 
 # Copy /venv from the previous stage
 COPY --from=build /venv /venv
