@@ -8,5 +8,5 @@ dependencies:
   - fbprophet
   - pip
   - pip:
-      - streamlit
       - yfinance
+      - streamlit
