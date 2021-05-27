@@ -10,6 +10,11 @@ The data is extracted from Yahoo! Finance using the `yfinance` library.
 > **Warning:** This tool neither recommends nor guarantees the performance of the given ticker.
 > Use this tool and its forecasts at your own risk.
 
+## Demo
+You can access the demo version deployed on Streamlit server at:
+
+[https://share.streamlit.io/kavehbc/market-analyzer/app.py](https://share.streamlit.io/kavehbc/market-analyzer/app.py)
+
 ## Run
 In order to run this tool, you must have Streamlit installed on your machine/environment:
 

@@ -10,7 +10,7 @@ INTERVALS = {"1m": "1 minute", "2m": "2 minutes", "5m": "5 minutes", "15m": "15 
              "1mo": "1 month", "3mo": "3 months"}
 TICKER_TYPE = ["Crypto", "Stock"]
 CURRENCIES = ["USD", "EUR", "CAD", "GBP", "AUD", "JPY", "KRW", "RUB"]
-CRYPTOS = {"BTC": "Bitcoin", "ETH": "Ethereum", "BNB": "BinanceCoin", "USDT": "Tether",
+CRYPTOS = {None: "Select Crypto", "BTC": "Bitcoin", "ETH": "Ethereum", "BNB": "BinanceCoin", "USDT": "Tether",
            "ADA": "Cardano", "XRP": "XRP", "DOGE": "DogeCoin", "DOT1": "Polkadot", "BCH": "BitcoinCash",
            "UNI3": "Uniswap", "USDC": "USDCoin", "LTC": "Litecoin", "LINK": "Chainlink", "SOL1": "Solana",
            "XLM": "Stellar", "MATIC": "MaticNetwork", "HEX": "HEX", "ETC": "EthereumClassic",
@@ -21,3 +21,18 @@ CRYPTOS = {"BTC": "Bitcoin", "ETH": "Ethereum", "BNB": "BinanceCoin", "USDT": "T
            "WAVES": "Waves", "CTC1": "Creditcoin", "DASH": "Dash", "HBAR": "HederaHashgraph",
            "ZEC": "Zcash", "XEM": "NEM", "SNX": "SynthetixNetworkToken", "EGLD": "Elrond",
            "SUSHI": "Sushi", "CHZ": "Chiliz", "DCR": "Decred", "YFI": "yearnfinance"}
+HOLIDAYS = {None: "Select a country",
+            "CA": "Canada",
+            "CN": "China",
+            "DE": "Germany",
+            "IN": "India",
+            "FR": "France",
+            "GB": "United Kingdom",
+            "HK": "Hong Kong",
+            "NZ": "New Zealand",
+            "RU": "Russia",
+            "SG": "Singapore",
+            "KR": "South Korea",
+            "US": "Unites States"}
+seasonality_options = ['auto', True, False]
+seasonality_mode_options = ['multiplicative', 'additive']
