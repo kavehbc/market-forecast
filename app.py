@@ -38,6 +38,7 @@ def main():
     st_interval = st.sidebar.selectbox("Interval", options=list(INTERVALS.keys()), index=8,
                                        format_func=lambda x: INTERVALS[x])
     st_future_days = st.sidebar.number_input("Future Days", value=365, min_value=1, step=1)
+    st_future_volume = st.sidebar.number_input("Future Volume Assumption", value=0, min_value=0, step=1)
     st_training_percentage = st.sidebar.slider("Training Percentage", min_value=0.0, max_value=1.0, step=0.1, value=0.8)
     st_yearly_seasonality = st.sidebar.selectbox("Yearly Seasonality",
                                                  options=seasonality_options,
@@ -80,7 +81,10 @@ def main():
 
             # data preparation
             df_history_prep = df_history.reset_index()
-            data = df_history_prep[["Date", "Close"]]  # select Date and Price
+            if st_future_volume > 0:
+                data = df_history_prep[["Date", "Close", "Volume"]]
+            else:
+                data = df_history_prep[["Date", "Close"]] # select Date and Price
             data = data.rename(columns={"Date": "ds", "Close": "y"})
 
             # data training
@@ -89,6 +93,8 @@ def main():
                         weekly_seasonality=st_weekly_seasonality,
                         daily_seasonality=st_daily_seasonality,
                         seasonality_mode=st_seasonality_mode)
+            if st_future_volume > 0:
+                m.add_regressor('Volume')
             if st_holidays is not None:
                 m.add_country_holidays(country_name=st_holidays)
 
@@ -99,6 +105,9 @@ def main():
             # predicting the future
             st_app_status_placeholder.info("Generating the future dataset...")
             future = m.make_future_dataframe(periods=st_future_days)  # we need to specify the number of days in future
+            if st_future_volume > 0:
+                future['Volume'] = st_future_volume
+
             st_app_status_placeholder.info("Forecasting the future...")
             prediction = m.predict(future)
             st_app_status_placeholder.empty()
