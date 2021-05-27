@@ -1,10 +1,11 @@
 # Cryptocurrency & Stock Exchange Market Technical Analysis
 
 Like many, I used to track Crypto and Stock progress either for investment or curiosity.
-There are numerous amount of recommendations from traders, investors, business analysts and so on available on Internet,
-interestingly, sometimes, there are contradicting each other.
+There are numerous amount of recommendations from financial advisors, traders, investors, business analysts, brokers
+and so on available on Internet, and interestingly, sometimes, there are contradicting each other.
 
-This is a fun project in `streamlit` using `Facebook Prophet` to analyze and forecast Stock and Crypto market.
+This is a fun open-source project in `streamlit` using `Facebook Prophet` to analyze and forecast
+Stock and Crypto-currency market based on their historical price only.
 The data is extracted from Yahoo! Finance using the `yfinance` library.
 
 > **Warning:** This tool neither recommends nor guarantees the performance of the given ticker.
