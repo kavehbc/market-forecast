@@ -57,6 +57,7 @@ def main():
     if st_ticker_name is None or len(st_ticker_name) == 0:
         st.warning("Please enter a valid ticker or select a crypto")
     else:
+        st_app_status_placeholder = st.empty()
         st.subheader(st_ticker_name)
         yf_ticker = yf.Ticker(st_ticker_name)
         with st.beta_expander("Info", expanded=True):
@@ -91,17 +92,16 @@ def main():
             if st_holidays is not None:
                 m.add_country_holidays(country_name=st_holidays)
 
-            st_fbprophet_status_placeholder = st.empty()
-            st_fbprophet_status_placeholder.info("Training started. It may take a while...")
+            st_app_status_placeholder.info("Training started. It may take a while...")
             m.fit(data)
-            st_fbprophet_status_placeholder.empty()
+            st_app_status_placeholder.empty()
 
             # predicting the future
-            st_fbprophet_status_placeholder.info("Generating the future dataset...")
+            st_app_status_placeholder.info("Generating the future dataset...")
             future = m.make_future_dataframe(periods=st_future_days)  # we need to specify the number of days in future
-            st_fbprophet_status_placeholder.info("Forecasting the future...")
+            st_app_status_placeholder.info("Forecasting the future...")
             prediction = m.predict(future)
-            st_fbprophet_status_placeholder.empty()
+            st_app_status_placeholder.empty()
             fig_components = m.plot_components(prediction)
 
             st.subheader("Prediction")
