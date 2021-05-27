@@ -59,6 +59,7 @@ def main():
                                        format_func=lambda x: INTERVALS[x])
     st_future_days = st.sidebar.number_input("Future Days", value=365, min_value=1, step=1)
     st_future_volume = st.sidebar.number_input("Future Volume Assumption", value=0, min_value=0, step=1)
+    st.sidebar.caption("Set Volume to 0 to ignore")
     st_training_percentage = st.sidebar.slider("Training Percentage", min_value=0.0, max_value=1.0, step=0.1, value=0.8)
     st_yearly_seasonality = st.sidebar.selectbox("Yearly Seasonality",
                                                  options=seasonality_options,

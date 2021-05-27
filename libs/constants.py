@@ -1,5 +1,5 @@
 MENU_OPTIONS = {"app": "Market Analysis",
-                "about": "About"}
+                "about": "About app"}
 PERIODS = {"1d": "1 day", "5d": "5 days",
            "1mo": "1 month", "3mo": "3 months", "6mo": "6 months",
            "1y": "1 year", "2y": "2 years", "5y": "5 years", "10y": "10 years",
@@ -23,7 +23,7 @@ CRYPTOS = {None: "Select Crypto", "BTC": "Bitcoin", "ETH": "Ethereum", "BNB": "B
            "WAVES": "Waves", "CTC1": "Creditcoin", "DASH": "Dash", "HBAR": "HederaHashgraph",
            "ZEC": "Zcash", "XEM": "NEM", "SNX": "SynthetixNetworkToken", "EGLD": "Elrond",
            "SUSHI": "Sushi", "CHZ": "Chiliz", "DCR": "Decred", "YFI": "yearnfinance"}
-HOLIDAYS = {None: "Select a country",
+HOLIDAYS = {None: "No holiday is set",
             "CA": "Canada",
             "CN": "China",
             "DE": "Germany",
