@@ -30,5 +30,9 @@ Once you run it, you can open it in your browser on [http://127.0.0.1](http://12
 For more information,
 you can check [Docker Hub (kavehbc/market-analyzer)](https://hub.docker.com/r/kavehbc/market-analyzer).
 
+## Developer(s)
+Kaveh Bakhtiyari - [Website](http://bakhtiyari.com) | [Medium](https://medium.com/@bakhtiyari)
+  | [LinkedIn](https://www.linkedin.com/in/bakhtiyari) | [Github](https://github.com/kavehbc)
+
 ## Contribution
 Feel free to join the open-source community and contribute to this repository.

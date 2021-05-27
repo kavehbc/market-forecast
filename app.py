@@ -5,6 +5,12 @@ import yfinance as yf
 import fbprophet
 from fbprophet import Prophet
 from libs.constants import *
+import os
+import inspect
+
+current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parent_dir = os.path.dirname(current_dir)
+markdown_file_path = current_dir + "/README.md"
 
 
 def format_crypto(x):
@@ -15,6 +21,20 @@ def format_crypto(x):
 
 
 def main():
+    st_app_menu = st.sidebar.selectbox("Main Menu", options=list(MENU_OPTIONS.keys()), index=0,
+                                       format_func=lambda x: MENU_OPTIONS[x])
+
+    if st_app_menu == "about":
+        if not os.path.exists(markdown_file_path):
+            st.error("Markdown file does not exist.")
+            st.stop()
+
+        with open(markdown_file_path, 'r', encoding="utf-8") as outfile:
+            markdown_content = outfile.read()
+
+        st.markdown(markdown_content, unsafe_allow_html=True)
+        st.stop()
+
     st.title("Market Technical Analysis")
     st.warning("**Warning:** This tool neither recommends nor guarantees the performance of the given ticker. "
                "Use this tool and its forecasts at your own risk.")
@@ -84,7 +104,7 @@ def main():
             if st_future_volume > 0:
                 data = df_history_prep[["Date", "Close", "Volume"]]
             else:
-                data = df_history_prep[["Date", "Close"]] # select Date and Price
+                data = df_history_prep[["Date", "Close"]]  # select Date and Price
             data = data.rename(columns={"Date": "ds", "Close": "y"})
 
             # data training
