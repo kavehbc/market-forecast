@@ -1,7 +1,6 @@
 import json
 import pandas as pd
 import os
-import streamlit as st
 
 local_db_path = "db/popular.json"
 db_folder = "/tmp"
@@ -16,10 +15,6 @@ def get_file_path(mode="open"):
             file_path = local_db_path
     else:
         file_path = local_db_path
-
-    st.write(mode)
-    st.write(os.path.exists("/tmp"))
-    st.write(file_path)
     return file_path
 
 
