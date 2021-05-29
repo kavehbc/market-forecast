@@ -5,8 +5,11 @@ from fbprophet.plot import add_changepoints_to_plot, plot_cross_validation_metri
 
 @st.cache(max_entries=50, ttl=900, allow_output_mutation=True,
           suppress_st_warning=True, show_spinner=False)
-def cross_validating(model):
-    df_cv = cross_validation(model, initial='730 days', period='180 days', horizon='365 days')
+def cross_validating(model, initial_days=730, period_days=180, horizon_days=365):
+    df_cv = cross_validation(model,
+                             initial=str(initial_days) + ' days',
+                             period=str(period_days) + ' days',
+                             horizon=str(horizon_days) + ' days')
     return df_cv
 
 

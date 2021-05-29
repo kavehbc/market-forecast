@@ -20,7 +20,7 @@ def ui_ticker_details(ui_params):
         st.write(ticker.info)
 
     df_recommendations = ticker.recommendations
-    st.subheader("Recommendations")
+    st.subheader(":ribbon: Recommendations")
     if df_recommendations is None:
         st.error("There is no recommendation available.")
     else:
@@ -31,7 +31,7 @@ def ui_ticker_details(ui_params):
     if df_history is not None:
         df_history_desc = df_history.sort_index(ascending=False)
 
-        st.subheader("History")
+        st.subheader(":page_with_curl: History")
         st.write(df_history_desc)
 
     return df_history

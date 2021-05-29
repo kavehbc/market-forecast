@@ -13,7 +13,7 @@ def format_crypto(x):
 
 def create_ui_params():
     st.title("Market Technical Analysis")
-    st.warning("**Warning:** This tool neither recommends nor guarantees the performance of the given ticker. "
+    st.warning(":warning: **Warning:** This tool neither recommends nor guarantees the performance of the given ticker. "
                "Use this tool and its forecasts at your own risk.")
     st.caption("Data is extracted from Yahoo! Finance")
     st.caption("Data analysis is done by Facebook Prophet v." + fbprophet.__version__)

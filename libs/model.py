@@ -23,6 +23,8 @@ def create_model(ui_params, data):
     return m
 
 
+@st.cache(max_entries=50, ttl=900, allow_output_mutation=True,
+          suppress_st_warning=True, show_spinner=False)
 def generate_future(ui_params, model):
     # we need to specify the number of days in future
     future = model.make_future_dataframe(periods=ui_params.future_days)
@@ -31,6 +33,8 @@ def generate_future(ui_params, model):
     return future
 
 
+@st.cache(max_entries=50, ttl=900, allow_output_mutation=True,
+          suppress_st_warning=True, show_spinner=False)
 def predict(model, future):
     prediction = model.predict(future)
     return prediction

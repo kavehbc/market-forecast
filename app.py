@@ -21,7 +21,7 @@ def main():
     ui_params = create_ui_params()
 
     if ui_params.ticker_name is None or len(ui_params.ticker_name) == 0:
-        st.warning("Please enter a valid ticker or select a crypto from the sidebar menu")
+        st.warning(":heavy_exclamation_mark: Please enter a valid ticker or select a crypto from the sidebar menu")
     else:
         ph_app_status = st.empty()
         st.subheader(ui_params.ticker_name)
@@ -31,7 +31,7 @@ def main():
             # data preparation
             data = prepare_hisotry_for_fbprophet(ui_params, df_history)
 
-            st.subheader("Prediction")
+            st.subheader(":boom: Prediction")
 
             # data training
             ph_training = st.empty()
@@ -59,22 +59,34 @@ def main():
             ph_training.empty()
 
             # plot the result
-            st.subheader("Visualization")
+            st.subheader(":chart_with_upwards_trend: Visualization")
             plot_predictions(ui_params, m, prediction)
             plot_fbprophet_components(m, prediction)
 
             # Execute cross validation
-            st.subheader("Cross Validation")
-            show_cross_validation = st.checkbox("Show Cross-Validation", value=False)
-            st.caption("This can take some time.")
-            st_validation_metric = st.selectbox("Validation Metric", options=VALIDATION_METRICS,
-                                                index=3)
+            st.subheader(":question: Cross-Validation")
+            with st.form(key="cross-validation"):
+                col1, col2, col3 = st.beta_columns(3)
+                with col1:
+                    st_cv_initial_days = st.number_input("Initial days", value=730, min_value=1, step=1)
+                with col2:
+                    st_cv_period_days = st.number_input("Period days", value=180, min_value=1, step=1)
+                with col3:
+                    st_cv_horizon_days = st.number_input("Horizon days", value=365, min_value=1, step=1)
+
+                st_validation_metric = st.selectbox("Validation Metric", options=VALIDATION_METRICS,
+                                                    index=3)
+                show_cross_validation = st.form_submit_button(label='Cross-Validate')
+                # show_cross_validation = st.checkbox("Show Cross-Validation", value=False)
+                st.caption("This can take some time.")
+
             ph_cross_validation = st.empty()
 
             if show_cross_validation:
                 ph_app_status.info("Cross-Validating...")
                 ph_cross_validation.info("Cross-Validation started. Please wait...")
-                df_cv = cross_validating(m)
+                df_cv = cross_validating(m,
+                                         st_cv_initial_days, st_cv_period_days, st_cv_horizon_days)
 
                 ph_cross_validation.info("Calculating performance metrics. Please wait...")
                 pm = evaluating(df_cv)
