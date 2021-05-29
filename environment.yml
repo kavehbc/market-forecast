@@ -12,3 +12,4 @@ dependencies:
   - pip:
       - yfinance
       - streamlit
+      - streamlit-tags

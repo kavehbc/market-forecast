@@ -4,3 +4,4 @@ numpy
 pandas
 yfinance
 streamlit
+streamlit-tags
