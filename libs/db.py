@@ -1,18 +1,33 @@
 import json
 import pandas as pd
+import os
 
-db_path = "db/popular.json"
+local_db_path = "db/popular.json"
+db_folder = "/temp"
+db_path = "/temp/popular.json"
+
+
+def get_file_path(mode="open"):
+    if os.path.exists(db_folder):
+        if os.path.exists(db_path) or mode == "save":
+            file_path = db_path
+        elif mode == "open":
+            file_path = local_db_path
+    else:
+        file_path = local_db_path
+    return file_path
 
 
 def read_db():
-    with open(db_path) as f:
+    file_to_open = get_file_path(mode="open")
+    with open(file_to_open) as f:
         json_data = json.load(f)
         return json_data
 
 
 def save_db(json_data):
-    # json_data = json.dumps(json_data) # , indent=4
-    with open(db_path, 'w') as json_file:
+    file_to_save = get_file_path(mode="save")
+    with open(file_to_save, 'w') as json_file:
         json.dump(json_data, json_file, indent=4)
 
     # save sorted data
@@ -20,8 +35,10 @@ def save_db(json_data):
 
 
 def sort_json():
-    unsorted = pd.read_json(db_path)
-    (unsorted.sort_values("count", ascending=False)).to_json(db_path, orient='records')
+    file_to_open = get_file_path(mode="open")
+    file_to_save = get_file_path(mode="save")
+    unsorted = pd.read_json(file_to_open)
+    (unsorted.sort_values("count", ascending=False)).to_json(file_to_save, orient='records')
 
 
 def update_db(ticker_name):
