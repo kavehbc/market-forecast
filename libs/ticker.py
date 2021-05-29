@@ -22,7 +22,7 @@ def ui_ticker_details(ui_params):
     df_recommendations = ticker.recommendations
     st.subheader(":ribbon: Recommendations")
     if df_recommendations is None:
-        st.error("There is no recommendation available.")
+        st.error(":x: There is no recommendation available.")
     else:
         df_recommendations_desc = df_recommendations.sort_index(ascending=False)
         st.write(df_recommendations_desc)

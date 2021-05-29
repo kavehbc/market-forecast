@@ -1,8 +1,10 @@
 import streamlit as st
 import numpy as np
+
 from libs.constants import *
 from libs.cross_validation import cross_validating, evaluating, plot_validation
 from libs.data_preprocessing import prepare_hisotry_for_fbprophet
+from libs.future_change import display_future_change
 from libs.model import create_model, predict, generate_future
 from libs.readme import show_readme
 from libs.ticker import ui_ticker_details
@@ -49,14 +51,21 @@ def main():
             prediction = predict(m, future)
             col1, col2 = st.beta_columns(2)
             with col1:
-                st_from_date = np.datetime64(st.date_input("From", value=prediction["ds"].min()))
+                st_from_date = np.datetime64(st.date_input("From",
+                                                           value=data["ds"].max(),
+                                                           min_value=data["ds"].max()))
             with col2:
-                st_to_date = np.datetime64(st.date_input("Until", value=prediction["ds"].max()))
+                st_to_date = np.datetime64(st.date_input("Until",
+                                                         value=prediction["ds"].max(),
+                                                         max_value=prediction["ds"].max()))
 
             filtered_prediction = prediction[(prediction["ds"] >= st_from_date) &
                                              (prediction["ds"] <= st_to_date)]
             st.write(filtered_prediction)
             ph_training.empty()
+
+            st.subheader(":dizzy: Future Change")
+            display_future_change(data, filtered_prediction)
 
             # plot the result
             st.subheader(":chart_with_upwards_trend: Visualization")
