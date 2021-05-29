@@ -71,7 +71,8 @@ def get_top_tickers(n=100):
 
 
 def tickers_to_df():
-    df_tickers = pd.read_json(db_path)
+    file_to_open = get_file_path(mode="open")
+    df_tickers = pd.read_json(file_to_open)
     return df_tickers
 
 
