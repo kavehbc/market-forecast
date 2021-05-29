@@ -1,6 +1,5 @@
 import streamlit as st
 import yfinance as yf
-
 from libs.dot_dict_class import DotDict
 
 

@@ -9,9 +9,6 @@ from libs.ticker import ui_ticker_details
 from libs.ui_params import create_ui_params
 from libs.visualization import plot_predictions, plot_fbprophet_components
 
-import matplotlib.pyplot as plt
-from fbprophet.diagnostics import cross_validation, performance_metrics
-from fbprophet.plot import add_changepoints_to_plot, plot_cross_validation_metric
 
 def main():
     st_app_menu = st.sidebar.selectbox("Main Menu", options=list(MENU_OPTIONS.keys()), index=0,
