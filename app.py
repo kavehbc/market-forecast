@@ -1,11 +1,11 @@
 import streamlit as st
-import streamlit.components.v1 as components
 import numpy as np
 
 from libs.constants import *
 from libs.cross_validation import cross_validating, evaluating, plot_validation
 from libs.data_preprocessing import prepare_hisotry_for_fbprophet
 from libs.future_change import display_future_change
+from libs.injection import manage_injections
 from libs.model import create_model, predict, generate_future
 from libs.readme import show_readme
 from libs.ticker import ui_ticker_details
@@ -14,10 +14,8 @@ from libs.visualization import plot_predictions, plot_fbprophet_components
 
 
 def main():
-
-    HtmlFile = open("injection/statscounter.html", 'r', encoding='utf-8')
-    source_code = HtmlFile.read()
-    components.html(source_code, height=1)
+    # inject required HTML/CSS/JS into the project
+    manage_injections()
 
     st_app_menu = st.sidebar.selectbox("Main Menu", options=list(MENU_OPTIONS.keys()), index=0,
                                        format_func=lambda x: MENU_OPTIONS[x])
