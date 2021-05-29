@@ -4,8 +4,8 @@ import os
 import streamlit as st
 
 local_db_path = "db/popular.json"
-db_folder = "/temp"
-db_path = "/temp/popular.json"
+db_folder = "/tmp"
+db_path = "/tmp/popular.json"
 
 
 def get_file_path(mode="open"):
@@ -18,7 +18,7 @@ def get_file_path(mode="open"):
         file_path = local_db_path
 
     st.write(mode)
-    st.write(os.path.exists("/home/kavehbc"))
+    st.write(os.path.exists("/tmp"))
     st.write(file_path)
     return file_path
 
