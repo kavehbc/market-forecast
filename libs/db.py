@@ -51,3 +51,8 @@ def get_top_tickers(n=100):
         tickers.append(ticker["ticker"])
         counter += 1
     return tickers
+
+
+def tickers_to_df():
+    df_tickers = pd.read_json(db_path)
+    return df_tickers

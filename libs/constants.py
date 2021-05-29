@@ -1,4 +1,5 @@
 MENU_OPTIONS = {"app": "Market Analysis",
+                "popular": "Popular Tickers",
                 "about": "About app"}
 PERIODS = {"1d": "1 day", "5d": "5 days",
            "1mo": "1 month", "3mo": "3 months", "6mo": "6 months",

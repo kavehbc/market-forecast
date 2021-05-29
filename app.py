@@ -4,7 +4,7 @@ import numpy as np
 from libs.constants import *
 from libs.cross_validation import cross_validating, evaluating, plot_validation
 from libs.data_preprocessing import prepare_hisotry_for_fbprophet
-from libs.db import update_db
+from libs.db import update_db, tickers_to_df
 from libs.future_change import display_future_change
 from libs.injection import manage_injections
 from libs.model import create_model, predict, generate_future
@@ -23,6 +23,13 @@ def main():
 
     if st_app_menu == "about":
         show_readme()
+        st.stop()
+
+    if st_app_menu == "popular":
+        df_tickers = tickers_to_df()
+        top_n = 100
+        st.title(f"Top {top_n} Tickers")
+        st.write(df_tickers.head(top_n))
         st.stop()
 
     ui_params = create_ui_params()
