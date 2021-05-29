@@ -1,6 +1,8 @@
 import streamlit as st
 import fbprophet
+import streamlit_tags as st_tags
 from libs.constants import *
+from libs.db import get_top_tickers
 from libs.dot_dict_class import DotDict
 
 
@@ -30,8 +32,20 @@ def create_ui_params():
             st_ticker_name = st_crypto_name + "-" + st_currency_name
 
     elif st_crypto_stock == TICKER_TYPE[1]:
-        st_ticker_name = st.sidebar.text_input("Stock Ticker", value="MSFT").upper()
-        st.sidebar.caption("Add `.TO` for the tickers in Toronto Stock Exchange")
+        st_ticker_name_list = st_tags.st_tags_sidebar(
+            label='Stock Ticker',
+            text='Press enter',
+            value='',
+            suggestions=get_top_tickers(n=100),
+            maxtags=1,
+            key='1')
+        if len(st_ticker_name_list) > 0:
+            st_ticker_name = st_ticker_name_list[0]
+        else:
+            st_ticker_name = None
+
+        # st_ticker_name = st.sidebar.text_input("Stock Ticker", value="MSFT").upper()
+        st.sidebar.caption("Add `.TO` for the tickers in TSE")
     st_period = st.sidebar.selectbox("Period (History)", options=list(PERIODS.keys()), index=7,
                                      format_func=lambda x: PERIODS[x])
     st_interval = st.sidebar.selectbox("Interval", options=list(INTERVALS.keys()), index=8,

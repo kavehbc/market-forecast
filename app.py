@@ -4,6 +4,7 @@ import numpy as np
 from libs.constants import *
 from libs.cross_validation import cross_validating, evaluating, plot_validation
 from libs.data_preprocessing import prepare_hisotry_for_fbprophet
+from libs.db import update_db
 from libs.future_change import display_future_change
 from libs.injection import manage_injections
 from libs.model import create_model, predict, generate_future
@@ -34,6 +35,9 @@ def main():
 
         df_history = ui_ticker_details(ui_params)
         if df_history is not None:
+            # update ticker database
+            update_db(ui_params.ticker_name)
+
             # data preparation
             data = prepare_hisotry_for_fbprophet(ui_params, df_history)
 
