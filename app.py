@@ -21,7 +21,7 @@ def main():
     ui_params = create_ui_params()
 
     if ui_params.ticker_name is None or len(ui_params.ticker_name) == 0:
-        st.warning("Please enter a valid ticker or select a crypto")
+        st.warning("Please enter a valid ticker or select a crypto from the sidebar menu")
     else:
         ph_app_status = st.empty()
         st.subheader(ui_params.ticker_name)
@@ -88,5 +88,7 @@ def main():
 
 
 if __name__ == '__main__':
-    st.set_page_config("Market Technical Analysis")
+    st.set_page_config(page_title="Market Technical Analysis",
+                       page_icon="💹",
+                       initial_sidebar_state="expanded")
     main()
