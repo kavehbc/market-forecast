@@ -29,6 +29,9 @@ def main():
         df_tickers = tickers_to_df()
         top_n = 100
         st.title(f"Top {top_n} Tickers")
+        st.caption("These data is stored where this app is hosted."
+                   " This app would **NOT** transmit these data elsewhere automatically."
+                   " These data is stored for the autocomplete feature.")
         st.write(df_tickers.head(top_n))
         st.stop()
 

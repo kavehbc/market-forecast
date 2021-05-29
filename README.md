@@ -31,6 +31,21 @@ Once you run it, you can open it in your browser on [http://127.0.0.1](http://12
 ## Github Repo
 This project is open-source, and it is available on Github at [https://github.com/kavehbc/market-analyzer](https://github.com/kavehbc/market-analyzer).
 
+## Usage Tracking
+### User Hits/Views
+The app usage is tracked using [statcounter.com](https://statcounter.com/),
+and it does not contain any personal information. The file containing the script is located at
+`injection\statcounter.html`.
+
+Injection functions are managed inside `libs\injection.py`.
+
+### Searched Tickers/Symbols
+The searched tickers are stored in `db\popular.json` file.
+This file is being used for the autocomplete feature on the ticker's text input field.
+The functions related to the data storage and retrieval are managed inside `libs\db.py`.
+
+This database is stored where the app is hosted, and it does not transmit these data elsewhere automatically.
+
 ## Developer(s)
 Kaveh Bakhtiyari - [Website](http://bakhtiyari.com) | [Medium](https://medium.com/@bakhtiyari)
   | [LinkedIn](https://www.linkedin.com/in/bakhtiyari) | [Github](https://github.com/kavehbc)

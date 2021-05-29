@@ -2,7 +2,7 @@ import streamlit.components.v1 as components
 
 
 def manage_injections():
-    inject_html("statscounter.html")
+    inject_html("statcounter.html")
 
 
 def inject_html(html_file):
