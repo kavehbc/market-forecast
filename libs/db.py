@@ -18,7 +18,7 @@ def get_file_path(mode="open"):
         file_path = local_db_path
 
     st.write(mode)
-    st.write(os.path.exists(db_folder))
+    st.write(os.path.exists("/temp"))
     st.write(file_path)
     return file_path
 
