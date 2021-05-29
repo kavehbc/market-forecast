@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import numpy as np
 
 from libs.constants import *
@@ -13,6 +14,11 @@ from libs.visualization import plot_predictions, plot_fbprophet_components
 
 
 def main():
+
+    HtmlFile = open("ads/google_adsense.html", 'r', encoding ='utf-8')
+    source_code = HtmlFile.read()
+    components.html(source_code, height=150)
+
     st_app_menu = st.sidebar.selectbox("Main Menu", options=list(MENU_OPTIONS.keys()), index=0,
                                        format_func=lambda x: MENU_OPTIONS[x])
 
