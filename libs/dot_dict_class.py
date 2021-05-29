@@ -30,3 +30,9 @@ class DotDict(dict):
     def __delitem__(self, key):
         super(DotDict, self).__delitem__(key)
         del self.__dict__[key]
+
+    def __hash__(self):
+        id_string = ""
+        for item in self.items():
+            id_string += str(item[0]) + ":" + str(item[1]) + "&"
+        return hash(id_string)

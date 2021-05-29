@@ -1,7 +1,7 @@
 import streamlit as st
 import fbprophet
 from libs.constants import *
-from libs.params_dic_class import DotDict
+from libs.dot_dict_class import DotDict
 
 
 def format_crypto(x):
@@ -32,10 +32,13 @@ def create_ui_params():
     elif st_crypto_stock == TICKER_TYPE[1]:
         st_ticker_name = st.sidebar.text_input("Stock Ticker", value="MSFT").upper()
         st.sidebar.caption("Add `.TO` for the tickers in Toronto Stock Exchange")
-    st_period = st.sidebar.selectbox("Period", options=list(PERIODS.keys()), index=7,
+    st_period = st.sidebar.selectbox("Period (History)", options=list(PERIODS.keys()), index=7,
                                      format_func=lambda x: PERIODS[x])
     st_interval = st.sidebar.selectbox("Interval", options=list(INTERVALS.keys()), index=8,
                                        format_func=lambda x: INTERVALS[x])
+    st_price_column = st.sidebar.selectbox("Price",
+                                           options=TICKER_DATA_COLUMN,
+                                           index=3)
     st_future_days = st.sidebar.number_input("Future Days", value=365, min_value=1, step=1)
     st_future_volume = st.sidebar.number_input("Future Volume Assumption", value=0, min_value=0, step=1)
     st.sidebar.caption("Set Volume to 0 to ignore")
@@ -64,6 +67,7 @@ def create_ui_params():
                          period=st_period,
                          interval=st_interval,
                          future_days=st_future_days,
+                         price_column=st_price_column,
                          future_volume=st_future_volume,
                          training_percentage=st_training_percentage,
                          yearly_seasonality=st_yearly_seasonality,

@@ -36,5 +36,7 @@ HOLIDAYS = {None: "No holiday is set",
             "SG": "Singapore",
             "KR": "South Korea",
             "US": "Unites States"}
+TICKER_DATA_COLUMN = ['Open', 'High', 'Low', 'Close']
 SEASONALITY_OPTIONS = ['auto', True, False]
 SEASONALITY_MODE_OPTIONS = ['multiplicative', 'additive']
+VALIDATION_METRICS = ['mse', 'rmse', 'mae', 'mape', 'mdape', 'coverage']

@@ -3,13 +3,13 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_agg import RendererAgg
 
 
-def plot_predictions(model, prediction):
+def plot_predictions(ui_params, model, prediction):
     _lock = RendererAgg.lock
     with _lock:
         model.plot(prediction)
         plt.title("Prediction")
         plt.xlabel("Date")
-        plt.ylabel("Close Price")
+        plt.ylabel(ui_params.price_column + " Price")
         # plt.show()
         st.pyplot(plt)
 
