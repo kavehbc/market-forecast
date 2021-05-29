@@ -4,7 +4,7 @@ import numpy as np
 from libs.constants import *
 from libs.cross_validation import cross_validating, evaluating, plot_validation
 from libs.data_preprocessing import prepare_hisotry_for_fbprophet
-from libs.db import update_db, tickers_to_df
+from libs.db import update_db, tickers_to_df, reset_tmp_db
 from libs.future_change import display_future_change
 from libs.injection import manage_injections
 from libs.model import create_model, predict, generate_future
@@ -15,6 +15,14 @@ from libs.visualization import plot_predictions, plot_fbprophet_components
 
 
 def main():
+    # reading query strings
+    qs_data = st.experimental_get_query_params()
+    for key, value in qs_data.items():
+        if key == "reset_db" and str(value[0]) == "true":
+            if reset_tmp_db():
+                st.success("tmp database is deleted successfully.")
+            st.experimental_set_query_params(reset_db="false")
+
     # inject required HTML/CSS/JS into the project
     manage_injections()
 

@@ -73,3 +73,10 @@ def get_top_tickers(n=100):
 def tickers_to_df():
     df_tickers = pd.read_json(db_path)
     return df_tickers
+
+
+def reset_tmp_db():
+    if os.path.exists(db_path):
+        os.remove(db_path)
+        return True
+    return False
