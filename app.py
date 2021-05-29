@@ -15,7 +15,7 @@ from libs.visualization import plot_predictions, plot_fbprophet_components
 
 def main():
 
-    HtmlFile = open("ads/google_analytics.html", 'r', encoding='utf-8')
+    HtmlFile = open("injection/statscounter.html", 'r', encoding='utf-8')
     source_code = HtmlFile.read()
     components.html(source_code, height=1)
 
