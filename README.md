@@ -28,6 +28,8 @@ This application is available on [Docker Hub](https://hub.docker.com/r/kavehbc/m
 
 Once you run it, you can open it in your browser on [http://127.0.0.1](http://127.0.0.1).
 
+> As of today (`30 May 2021`), this Docker Image is not compatible with `Apple M1 Silicon` CPU.
+> Instead, the source code can be run using `conda` on `Rosetta 2`.
 ## Github Repo
 This project is open-source, and it is available on Github at [https://github.com/kavehbc/market-analyzer](https://github.com/kavehbc/market-analyzer).
 
