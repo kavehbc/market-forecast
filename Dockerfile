@@ -53,4 +53,5 @@ SHELL ["/bin/bash", "-c"]
 # change file permision to prevent access denied error
 RUN chmod +x run.bash
 
-ENTRYPOINT ["./run.bash"]
+# ENTRYPOINT ["./run.bash"]
+CMD ["./run.bash"]
