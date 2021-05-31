@@ -4,7 +4,7 @@ Like many, I used to track Crypto and Stock progress either for investment or cu
 There are numerous amount of recommendations from financial advisors, traders, investors, business analysts, brokers
 and so on available on Internet, and interestingly, sometimes, there are contradicting each other.
 
-This is a fun open-source project in `streamlit` using `Facebook Prophet` to analyze and forecast
+This is a fun open-source project in `streamlit` using `Facebook Prophet` and `Neural Prophet` to analyze and forecast
 Stock and Crypto-currency market based on their historical price only.
 The data is extracted from Yahoo! Finance using the `yfinance` library.
 

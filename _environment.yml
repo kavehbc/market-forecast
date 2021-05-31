@@ -12,5 +12,7 @@ dependencies:
   - streamlit
   - pip
   - pip:
+      - --find-links https://download.pytorch.org/whl/torch_stable.html
+      - neuralprophet
       - yfinance
       - streamlit-tags

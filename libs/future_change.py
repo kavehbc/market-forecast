@@ -8,12 +8,17 @@ def highlight_negative(s):
     return ['color: red;'] * len(s) if s.Change < 0 else ['color: green'] * len(s)
 
 
-def display_future_change(data, filtered_prediction):
+def display_future_change(ui_params, data, filtered_prediction):
+    if ui_params.model == "fbprophet":
+        yhat_label = "yhat"
+    elif ui_params.model == "neuralprophet":
+        yhat_label = "yhat1"
+
     last_day_price = data[data["ds"] == data["ds"].max()].iloc[0]["y"]
     next_day_price = filtered_prediction[filtered_prediction["ds"] == filtered_prediction["ds"].min()].iloc[0][
-        "yhat"]
+        yhat_label]
     last_future_day_price = \
-        filtered_prediction[filtered_prediction["ds"] == filtered_prediction["ds"].max()].iloc[0]["yhat"]
+        filtered_prediction[filtered_prediction["ds"] == filtered_prediction["ds"].max()].iloc[0][yhat_label]
 
     last_day_date = datetime.datetime.date(data["ds"].max())
     next_day_price_date = datetime.datetime.date(filtered_prediction["ds"].min())

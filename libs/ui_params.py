@@ -1,5 +1,4 @@
 import streamlit as st
-import fbprophet
 import streamlit_tags as st_tags
 from libs.constants import *
 from libs.db import get_top_tickers
@@ -18,14 +17,15 @@ def create_ui_params():
     st.warning(
         ":warning: **Warning:** This tool neither recommends nor guarantees the performance of the given ticker. "
         "Use this tool and its forecasts at your own risk.")
-    st.caption("Raw data is extracted from `Yahoo! Finance`. "
-               f"Data analysis is done by `Facebook Prophet v.{fbprophet.__version__}`.")
+    st.caption("Raw data is extracted from `Yahoo! Finance`.")
     st.caption("The app usage is tracked using [statcounter.com](https://statcounter.com/),"
                " and it does not contain any personal information, since we never ask you any personal info."
                " The symbol names searched are stored for the auto-complete future."
                " That locally stored database can be accessed via `Popular Tickers` menu option."
                " This is an open-source application, and for more information you can check the `About app` section."
                " By using this app, you agreed with these terms and conditions.")
+    st_ml_model = st.sidebar.selectbox("Predictive Model", options=list(ML_MODELS.keys()), index=0,
+                                       format_func=lambda x: ML_MODELS[x])
     st_crypto_stock = st.sidebar.radio("Ticker Type", options=TICKER_TYPE)
     if st_crypto_stock == TICKER_TYPE[0]:
         st_crypto_name = st.sidebar.selectbox("Crypto Ticker", options=list(CRYPTOS.keys()),
@@ -83,7 +83,8 @@ def create_ui_params():
                                                options=SEASONALITY_MODE_OPTIONS,
                                                index=st_seasonality_mode_index)
 
-    dic_return = DotDict(ticker_name=st_ticker_name,
+    dic_return = DotDict(model=st_ml_model,
+                         ticker_name=st_ticker_name,
                          period=st_period,
                          interval=st_interval,
                          future_days=st_future_days,
@@ -95,4 +96,28 @@ def create_ui_params():
                          daily_seasonality=st_daily_seasonality,
                          holidays=st_holidays,
                          seasonality_mode=st_seasonality_mode)
+    return dic_return
+
+
+def create_cross_validation_form(ui_params):
+    col1, col2, col3 = st.beta_columns(3)
+    with col1:
+        st_cv_initial_days = st.number_input("Initial days", value=730, min_value=1, step=1)
+    with col2:
+        st_cv_period_days = st.number_input("Period days", value=180, min_value=1, step=1)
+    with col3:
+        st_cv_horizon_days = st.number_input("Horizon days", value=365, min_value=1, step=1)
+
+    st_validation_metric = st.selectbox("Validation Metric", options=VALIDATION_METRICS,
+                                        index=3)
+    show_cross_validation = st.form_submit_button(label='Cross-Validate')
+    # show_cross_validation = st.checkbox("Show Cross-Validation", value=False)
+    st.caption("This can take some time.")
+
+    dic_return = DotDict(initial_days=st_cv_initial_days,
+                         period_days=st_cv_period_days,
+                         horizon_days=st_cv_horizon_days,
+                         validation_metric=st_validation_metric,
+                         cross_validation=show_cross_validation)
+
     return dic_return

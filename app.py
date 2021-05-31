@@ -1,8 +1,11 @@
 import streamlit as st
 import numpy as np
+import os
+
+from matplotlib import pyplot as plt
 
 from libs.constants import *
-from libs.cross_validation import cross_validating, evaluating, plot_validation
+from libs.cross_validation import cross_validating, evaluating, plot_validation, plot_validation_neural
 from libs.data_preprocessing import prepare_hisotry_for_fbprophet
 from libs.db import update_db, tickers_to_df, reset_tmp_db
 from libs.future_change import display_future_change
@@ -10,8 +13,12 @@ from libs.injection import manage_injections
 from libs.model import create_model, predict, generate_future
 from libs.readme import show_readme
 from libs.ticker import ui_ticker_details
-from libs.ui_params import create_ui_params
+from libs.ui_params import create_ui_params, create_cross_validation_form
 from libs.visualization import plot_predictions, plot_fbprophet_components
+
+
+# this is to prevent the conflict of OpenMP runtime
+os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
 
 
 def main():
@@ -65,12 +72,12 @@ def main():
             ph_training = st.empty()
             ph_app_status.info("Training started. It may take a while...")
             ph_training.info("Training started. It may take a while...")
-            m = create_model(ui_params, data)
+            m, train_metrics, val_metrics = create_model(ui_params, data)
 
             # predicting the future
             ph_app_status.info("Generating the future dataset...")
             ph_training.info("Generating the future dataset...")
-            future = generate_future(ui_params, m)
+            future = generate_future(ui_params, m, data)
 
             ph_app_status.info("Forecasting...")
             ph_training.info("Forecasting...")
@@ -91,43 +98,43 @@ def main():
             ph_training.empty()
 
             st.subheader(":dizzy: Future Change")
-            display_future_change(data, filtered_prediction)
+            display_future_change(ui_params, data, filtered_prediction)
 
             # plot the result
             st.subheader(":chart_with_upwards_trend: Visualization")
             plot_predictions(ui_params, m, prediction)
-            plot_fbprophet_components(m, prediction)
+            plot_fbprophet_components(ui_params, m, prediction)
 
             # Execute cross validation
             st.subheader(":question: Cross-Validation")
-            with st.form(key="cross-validation"):
-                col1, col2, col3 = st.beta_columns(3)
-                with col1:
-                    st_cv_initial_days = st.number_input("Initial days", value=730, min_value=1, step=1)
-                with col2:
-                    st_cv_period_days = st.number_input("Period days", value=180, min_value=1, step=1)
-                with col3:
-                    st_cv_horizon_days = st.number_input("Horizon days", value=365, min_value=1, step=1)
-
-                st_validation_metric = st.selectbox("Validation Metric", options=VALIDATION_METRICS,
-                                                    index=3)
-                show_cross_validation = st.form_submit_button(label='Cross-Validate')
-                # show_cross_validation = st.checkbox("Show Cross-Validation", value=False)
-                st.caption("This can take some time.")
-
             ph_cross_validation = st.empty()
 
-            if show_cross_validation:
-                ph_app_status.info("Cross-Validating...")
-                ph_cross_validation.info("Cross-Validation started. Please wait...")
-                df_cv = cross_validating(m,
-                                         st_cv_initial_days, st_cv_period_days, st_cv_horizon_days)
+            if ui_params.model == "fbprophet":
+                with st.form(key="cross-validation"):
+                    ui_cv_params = create_cross_validation_form(ui_params)
 
-                ph_cross_validation.info("Calculating performance metrics. Please wait...")
-                pm = evaluating(df_cv)
+                if ui_cv_params.cross_validation:
+                    ph_app_status.info("Cross-Validating...")
+                    ph_cross_validation.info("Cross-Validation started. Please wait...")
 
-                ph_cross_validation.info("Displaying the results...")
-                plot_validation(pm, df_cv, metric=st_validation_metric)
+                    df_cv = cross_validating(m,
+                                             ui_cv_params.initial_days,
+                                             ui_cv_params.period_days,
+                                             ui_cv_params.horizon_days)
+
+                    ph_cross_validation.info("Calculating performance metrics. Please wait...")
+                    pm = evaluating(df_cv)
+
+                    ph_cross_validation.info("Displaying the results...")
+                    plot_validation(pm, df_cv, metric=ui_cv_params.validation_metric)
+            elif ui_params.model == "neuralprophet":
+                st.write("** Training Metrics**")
+                st.write(train_metrics)
+                plot_validation_neural(train_metrics, "SmoothL1Loss")
+                plot_validation_neural(train_metrics, "MAE")
+                st.write("** Validation Metrics**")
+                st.write(val_metrics)
+
                 ph_cross_validation.empty()
 
         # resetting the app status
