@@ -2,8 +2,6 @@ import streamlit as st
 import numpy as np
 import os
 
-from matplotlib import pyplot as plt
-
 from libs.constants import *
 from libs.cross_validation import cross_validating, evaluating, plot_validation, plot_validation_neural
 from libs.data_preprocessing import prepare_hisotry_for_fbprophet
