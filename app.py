@@ -80,7 +80,7 @@ def main():
             ph_app_status.info("Forecasting...")
             ph_training.info("Forecasting...")
             prediction = predict(m, future)
-            col1, col2 = st.beta_columns(2)
+            col1, col2 = st.columns(2)
             with col1:
                 st_from_date = np.datetime64(st.date_input("From",
                                                            value=data["ds"].max(),

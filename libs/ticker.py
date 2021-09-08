@@ -16,7 +16,7 @@ def get_ticker_details(ui_params):
 
 def ui_ticker_details(ui_params):
     ticker = get_ticker_details(ui_params)
-    with st.beta_expander("Ticker/Symbol Details", expanded=True):
+    with st.expander("Ticker/Symbol Details", expanded=True):
         st.write(ticker.info)
 
     df_recommendations = ticker.recommendations

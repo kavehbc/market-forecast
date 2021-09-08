@@ -100,7 +100,7 @@ def create_ui_params():
 
 
 def create_cross_validation_form(ui_params):
-    col1, col2, col3 = st.beta_columns(3)
+    col1, col2, col3 = st.columns(3)
     with col1:
         st_cv_initial_days = st.number_input("Initial days", value=730, min_value=1, step=1)
     with col2:
