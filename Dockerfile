@@ -1,10 +1,10 @@
-# docker build --progress=plain --no-cache -t market-analyzer .
-# docker save -o market-analyzer.tar market-analyzer
+# docker build --progress=plain --no-cache -t kavehbc/market-analyzer .
+# docker save -o market-analyzer.tar kavehbc/market-analyzer
 # docker load --input market-analyzer.tar
 
 FROM python:3.8-buster
 
-LABEL version="1.0.0"
+LABEL version="1.0.1"
 LABEL maintainer="Kaveh Bakhtiyari"
 LABEL url="http://bakhtiyari.com"
 LABEL vcs-url="https://github.com/kavehbc/market-analyzer"
