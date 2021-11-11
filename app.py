@@ -1,6 +1,7 @@
 import streamlit as st
 import numpy as np
 import os
+import datetime
 
 from libs.constants import *
 from libs.cross_validation import cross_validating, evaluating, plot_validation, plot_validation_neural
@@ -51,7 +52,7 @@ def main():
     ui_params = create_ui_params()
 
     if ui_params.ticker_name is None or len(ui_params.ticker_name) == 0:
-        st.warning(":heavy_exclamation_mark: Please enter a valid ticker or select a crypto from the sidebar menu")
+        st.warning(":heavy_exclamation_mark: Please enter a valid symbol or select a crypto from the sidebar menu")
     else:
         ph_app_status = st.empty()
         st.subheader(ui_params.ticker_name)
@@ -82,9 +83,11 @@ def main():
             prediction = predict(m, future)
             col1, col2 = st.columns(2)
             with col1:
+                today_date = data["ds"].max()
+                tomorrow_date = today_date + datetime.timedelta(days=1)
                 st_from_date = np.datetime64(st.date_input("From",
-                                                           value=data["ds"].max(),
-                                                           min_value=data["ds"].max()))
+                                                           value=tomorrow_date,
+                                                           min_value=tomorrow_date))
             with col2:
                 st_to_date = np.datetime64(st.date_input("Until",
                                                          value=prediction["ds"].max(),
@@ -95,7 +98,7 @@ def main():
             st.write(filtered_prediction)
             ph_training.empty()
 
-            st.subheader(":dizzy: Future Change")
+            st.header(":dizzy: Future Change")
             display_future_change(ui_params, data, filtered_prediction)
 
             # plot the result
@@ -140,7 +143,7 @@ def main():
 
 
 if __name__ == '__main__':
-    st.set_page_config(page_title="Market Technical Analysis",
+    st.set_page_config(page_title="Market Forecast",
                        page_icon="💹",
                        initial_sidebar_state="expanded")
     main()

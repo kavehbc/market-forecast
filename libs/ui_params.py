@@ -13,22 +13,22 @@ def format_crypto(x):
 
 
 def create_ui_params():
-    st.title("Market Technical Analysis")
+    st.title("Market Forecast")
     st.warning(
-        ":warning: **Warning:** This tool neither recommends nor guarantees the performance of the given ticker. "
+        ":warning: **Warning:** This tool neither recommends nor guarantees the performance of the given symbol. "
         "Use this tool and its forecasts at your own risk.")
     st.caption("Raw data is extracted from `Yahoo! Finance`.")
     st.caption("The app usage is tracked using [statcounter.com](https://statcounter.com/),"
                " and it does not contain any personal information, since we never ask you any personal info."
                " The symbol names searched are stored for the auto-complete future."
-               " That locally stored database can be accessed via `Popular Tickers` menu option."
+               " That locally stored database can be accessed via `Popular Symbols` menu option."
                " This is an open-source application, and for more information you can check the `About app` section."
                " By using this app, you agreed with these terms and conditions.")
     st_ml_model = st.sidebar.selectbox("Predictive Model", options=list(ML_MODELS.keys()), index=0,
                                        format_func=lambda x: ML_MODELS[x])
-    st_crypto_stock = st.sidebar.radio("Ticker Type", options=TICKER_TYPE)
+    st_crypto_stock = st.sidebar.radio("Symbol Type", options=TICKER_TYPE)
     if st_crypto_stock == TICKER_TYPE[0]:
-        st_crypto_name = st.sidebar.selectbox("Crypto Ticker", options=list(CRYPTOS.keys()),
+        st_crypto_name = st.sidebar.selectbox("Crypto Symbol", options=list(CRYPTOS.keys()),
                                               format_func=format_crypto)
         st_currency_name = st.sidebar.selectbox("Currency", options=CURRENCIES)
 
@@ -39,19 +39,19 @@ def create_ui_params():
 
     elif st_crypto_stock == TICKER_TYPE[1]:
         st_ticker_name_list = st_tags.st_tags_sidebar(
-            label='Stock Ticker',
+            label='Stock Symbol',
             text='Press enter',
             value='',
             suggestions=get_top_tickers(n=100),
             maxtags=1,
             key='1')
         if len(st_ticker_name_list) > 0:
-            st_ticker_name = st_ticker_name_list[0]
+            st_ticker_name = st_ticker_name_list[0].upper()
         else:
             st_ticker_name = None
 
-        # st_ticker_name = st.sidebar.text_input("Stock Ticker", value="MSFT").upper()
-        st.sidebar.caption("Add `.TO` for the tickers in TSE")
+        # st_ticker_name = st.sidebar.text_input("Stock Symbol", value="MSFT").upper()
+        st.sidebar.caption("Add `.TO` for the symbol in TSX")
     st_period = st.sidebar.selectbox("Period (History)", options=list(PERIODS.keys()), index=7,
                                      format_func=lambda x: PERIODS[x])
     st_interval = st.sidebar.selectbox("Interval", options=list(INTERVALS.keys()), index=8,

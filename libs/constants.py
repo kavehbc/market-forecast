@@ -1,5 +1,5 @@
-MENU_OPTIONS = {"app": "Market Analysis",
-                "popular": "Popular Tickers",
+MENU_OPTIONS = {"app": "Market Forecast",
+                "popular": "Popular Symbols",
                 "about": "About app"}
 ML_MODELS = {"fbprophet": "Facebook Prophet",
              "neuralprophet": "Neural Prophet"}
