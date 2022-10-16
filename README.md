@@ -14,7 +14,7 @@ The data is extracted from Yahoo! Finance using the `yfinance` library.
 ## Demo
 You can access the demo version deployed on Streamlit server at:
 
-[https://share.streamlit.io/kavehbc/market-analyzer/app.py](https://share.streamlit.io/kavehbc/market-analyzer/app.py)
+[https://stock-market.streamlitapp.com/](https://stock-market.streamlitapp.com/)
 
 ## Run
 In order to run this tool, you must have Streamlit installed on your machine/environment:
