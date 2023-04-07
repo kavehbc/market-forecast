@@ -1,11 +1,10 @@
 import streamlit as st
+import pandas as pd
 from fbprophet import Prophet
 from neuralprophet import NeuralProphet
 
 
-# hash_funcs={DotDict: hash},
-@st.cache(max_entries=50, allow_output_mutation=True,
-          suppress_st_warning=True, show_spinner=False)
+@st.cache_data(max_entries=50, show_spinner=False)
 def create_model(ui_params, data):
     # data training
     if ui_params.model == "fbprophet":
@@ -19,6 +18,8 @@ def create_model(ui_params, data):
             m.add_regressor('Volume')
         if ui_params.holidays is not None:
             m.add_country_holidays(country_name=ui_params.holidays)
+
+        data["ds"] = pd.to_datetime(data["ds"]).dt.tz_localize(None)
 
         m.fit(data)
         train_metrics = None
@@ -50,8 +51,7 @@ def create_model(ui_params, data):
     return m, train_metrics, val_metrics
 
 
-@st.cache(max_entries=50, ttl=900, allow_output_mutation=True,
-          suppress_st_warning=True, show_spinner=False)
+# @st.cache_data(max_entries=50, ttl=900, show_spinner=False)
 def generate_future(ui_params, model, data):
     # we need to specify the number of days in future
     if ui_params.model == "fbprophet":
@@ -66,8 +66,7 @@ def generate_future(ui_params, model, data):
     return future
 
 
-@st.cache(max_entries=50, ttl=900, allow_output_mutation=True,
-          suppress_st_warning=True, show_spinner=False)
+# @st.cache_data(max_entries=50, ttl=900, show_spinner=False)
 def predict(model, future):
     prediction = model.predict(future)
     return prediction

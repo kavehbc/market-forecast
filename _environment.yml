@@ -1,18 +1,18 @@
-name: myenv
+name: stock-market
 channels:
   - defaults
   - conda-forge
   - anaconda
 dependencies:
-  - python=3.8
+  - python=3.9
   - pystan
-  - fbprophet
   - numpy
   - pandas
-  - streamlit
   - pip
   - pip:
+      - fbprophet==0.7.1
+      - streamlit==1.21.0
+      - streamlit-tags==1.2.8
       - --find-links https://download.pytorch.org/whl/torch_stable.html
-      - neuralprophet
+      - neuralprophet==0.5.3
       - yfinance
-      - streamlit-tags

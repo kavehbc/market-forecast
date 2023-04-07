@@ -1,9 +1,9 @@
 -f https://download.pytorch.org/whl/torch_stable.html
-neuralprophet
+neuralprophet==0.5.3
 pystan==2.19.1.1
-fbprophet
+fbprophet==0.7.1
 numpy
 pandas
 yfinance
-streamlit
-streamlit-tags
+streamlit==1.21.0
+streamlit-tags==1.2.8

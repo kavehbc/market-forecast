@@ -14,7 +14,7 @@ The data is extracted from Yahoo! Finance using the `yfinance` library.
 ## Demo
 You can access the demo version deployed on Streamlit server at:
 
-[https://stock-market.streamlitapp.com/](https://stock-market.streamlitapp.com/)
+[https://stock-market.streamlit.app/](https://stock-market.streamlit.app/)
 
 ## Run
 In order to run this tool, you must have Streamlit installed on your machine/environment:
@@ -33,8 +33,8 @@ Once you run it, you can open it in your browser on [http://127.0.0.1](http://12
 > As of today (`30 May 2021`), this Docker Image is not compatible with `Apple M1 Silicon`.
 > Instead, the source code can be run using `conda` on `Rosetta 2`.
 
-## Github Repo
-This project is open-source, and it is available on Github at [https://github.com/kavehbc/market-analyzer](https://github.com/kavehbc/market-analyzer).
+## GitHub Repo
+This project is open-source, and it is available on GitHub at [https://github.com/kavehbc/market-analyzer](https://github.com/kavehbc/market-analyzer).
 
 ## Usage Tracking
 ### User Hits/Views
@@ -51,9 +51,14 @@ The functions related to the data storage and retrieval are managed inside `libs
 
 This database is stored where the app is hosted, and it does not transmit these data elsewhere automatically.
 
+## Limitations
+
+1. `Recommendation` section is removed since `yfinance` module can not decrypt data.
+
+
 ## Developer(s)
 Kaveh Bakhtiyari - [Website](http://bakhtiyari.com) | [Medium](https://medium.com/@bakhtiyari)
-  | [LinkedIn](https://www.linkedin.com/in/bakhtiyari) | [Github](https://github.com/kavehbc)
+  | [LinkedIn](https://www.linkedin.com/in/bakhtiyari) | [GitHub](https://github.com/kavehbc)
 
 ## Contribution
 Feel free to join the open-source community and contribute to this repository.
