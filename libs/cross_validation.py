@@ -31,12 +31,12 @@ def plot_validation(pm, df_cv, metric):
     st.pyplot(fig)
 
 
-def plot_validation_neural(train_metrics, metric_label="SmoothL1Loss"):
+def plot_validation_neural(train_metrics, metric_label="Loss"):
     fig, ax = plt.subplots(figsize=[10, 5])
     ax.plot(train_metrics.index, train_metrics[metric_label],
-            label='Training Loss')
-    ax.plot(train_metrics.index, train_metrics[f'{metric_label}_val'],
-            label='Validation Loss')
+            label=metric_label)
+    # ax.plot(train_metrics.index, train_metrics[f'{metric_label}_val'],
+    #         label='Validation Loss')
     ax.legend()
     plt.grid()
     plt.ylabel(metric_label)

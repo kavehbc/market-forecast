@@ -129,11 +129,14 @@ def main():
                     ph_cross_validation.info("Displaying the results...")
                     plot_validation(pm, df_cv, metric=ui_cv_params.validation_metric)
             elif ui_params.model == "neuralprophet":
-                st.write("** Training Metrics**")
+                st.write("**Training Metrics**")
                 st.write(train_metrics)
-                plot_validation_neural(train_metrics, "SmoothL1Loss")
+                plot_validation_neural(train_metrics, "Loss")
+                plot_validation_neural(train_metrics, "RMSE")
                 plot_validation_neural(train_metrics, "MAE")
-                st.write("** Validation Metrics**")
+                plot_validation_neural(train_metrics, "RegLoss")
+
+                st.write("**Validation Metrics**")
                 st.write(val_metrics)
 
                 ph_cross_validation.empty()
