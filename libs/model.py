@@ -37,12 +37,12 @@ def create_model(ui_params, data):
 
         if ui_params.training_percentage < 1.0:
             validation_percentage = 1.0 - ui_params.training_percentage
+            data["ds"] = pd.to_datetime(data["ds"]).dt.tz_localize(None)
             df_train, df_val = m.split_df(data, valid_p=validation_percentage)
         else:
             df_train = data
             df_val = None
 
-        df_train["ds"] = pd.to_datetime(df_train["ds"]).dt.tz_localize(None)
         train_metrics = m.fit(df_train, freq="D", validate_each_epoch=True)
         if df_val is None:
             val_metrics = None
