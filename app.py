@@ -138,6 +138,8 @@ def main():
 
                 st.write("**Validation Metrics**")
                 st.write(val_metrics)
+                plot_validation_neural(val_metrics, "Loss_test")
+                plot_validation_neural(val_metrics, "RegLoss_test")
 
                 ph_cross_validation.empty()
 

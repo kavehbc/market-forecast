@@ -35,8 +35,6 @@ def plot_validation_neural(train_metrics, metric_label="Loss"):
     fig, ax = plt.subplots(figsize=[10, 5])
     ax.plot(train_metrics.index, train_metrics[metric_label],
             label=metric_label)
-    # ax.plot(train_metrics.index, train_metrics[f'{metric_label}_val'],
-    #         label='Validation Loss')
     ax.legend()
     plt.grid()
     plt.ylabel(metric_label)
