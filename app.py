@@ -22,7 +22,7 @@ os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
 
 def main():
     # reading query strings
-    qs_data = st.experimental_get_query_params()
+    qs_data = st.query_params.to_dict()
     for key, value in qs_data.items():
         if key == "reset_db" and str(value[0]) == "true":
             if reset_tmp_db():
