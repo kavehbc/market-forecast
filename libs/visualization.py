@@ -20,7 +20,7 @@ def plot_fbprophet_components(ui_params, model, prediction):
         fig_parameters = None
     elif ui_params.model == "neuralprophet":
         fig_components = model.plot_components(prediction, residuals=True)
-        fig_parameters = model.plot_parameters();
+        fig_parameters = model.plot_parameters()
 
     _lock = RendererAgg.lock
     with _lock:
