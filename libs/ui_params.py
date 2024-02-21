@@ -38,13 +38,10 @@ def create_ui_params():
             st_ticker_name = st_crypto_name + "-" + st_currency_name
 
     elif st_crypto_stock == TICKER_TYPE[1]:
-        st_ticker_name_list = st_tags.st_tags_sidebar(
-            label='Stock Symbol',
-            text='Press enter',
-            value='',
-            suggestions=get_top_tickers(n=100),
-            maxtags=1,
-            key='1')
+
+        st_ticker_name_list = st.sidebar.text_input('Stock Symbol')
+        st_ticker_name_list = [st_ticker_name_list]
+
         if len(st_ticker_name_list) > 0:
             st_ticker_name = st_ticker_name_list[0].upper()
         else:
