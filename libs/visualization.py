@@ -17,14 +17,20 @@ def plot_predictions(ui_params, model, prediction):
 def plot_fbprophet_components(ui_params, model, prediction):
     if ui_params.model == "fbprophet":
         fig_components = model.plot_components(prediction)
-        fig_parameters = None
+
+        _lock = RendererAgg.lock
+        with _lock:
+            st.pyplot(fig_components)
+
     elif ui_params.model == "neuralprophet":
         fig_components = model.plot_components(prediction)
         fig_parameters = model.plot_parameters()
         st.write(type(fig_components))
 
-    _lock = RendererAgg.lock
-    with _lock:
-        st.pyplot(fig_components)
-        if fig_parameters:
-            st.pyplot(fig_parameters)
+        _lock = RendererAgg.lock
+        with _lock:
+            st.plotly_chart(fig_components)
+            if fig_parameters:
+                st.plotly_chart(fig_parameters)
+
+
