@@ -42,6 +42,7 @@ def create_model(ui_params, data):
             df_train = data
             df_val = None
 
+        df_train["ds"] = pd.to_datetime(df_train["ds"]).dt.tz_localize(None)
         train_metrics = m.fit(df_train, freq="D", validate_each_epoch=True)
         if df_val is None:
             val_metrics = None
