@@ -4,7 +4,7 @@ from prophet import Prophet
 from neuralprophet import NeuralProphet
 
 
-@st.cache_data(max_entries=50, show_spinner=False)
+# @st.cache_data(max_entries=50, show_spinner=False)
 def create_model(ui_params, data):
     # data training
     if ui_params.model == "fbprophet":
