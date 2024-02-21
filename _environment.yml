@@ -5,14 +5,13 @@ channels:
   - anaconda
 dependencies:
   - python=3.9
-  - pystan
   - numpy
   - pandas
   - pip
   - pip:
-      - fbprophet==0.7.1
-      - streamlit==1.21.0
-      - streamlit-tags==1.2.8
+      - prophet
+      - streamlit
+      - streamlit-tags
       - --find-links https://download.pytorch.org/whl/torch_stable.html
       - neuralprophet==0.5.3
       - yfinance
