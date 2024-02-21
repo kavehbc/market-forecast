@@ -1,6 +1,6 @@
 import streamlit as st
-from fbprophet.diagnostics import cross_validation, performance_metrics
-from fbprophet.plot import add_changepoints_to_plot, plot_cross_validation_metric
+from prophet.diagnostics import cross_validation, performance_metrics
+from prophet.plot import add_changepoints_to_plot, plot_cross_validation_metric
 from matplotlib import pyplot as plt
 
 
