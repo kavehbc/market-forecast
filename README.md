@@ -1,4 +1,4 @@
-# Cryptocurrency & Stock Market Forecast
+# Cryptocurrency & Stock Market Forecast (Predictive AI)
 
 Like many, I used to track Crypto and Stock progress either for investment or curiosity.
 There are numerous amount of recommendations from financial advisors, traders, investors, business analysts, brokers
@@ -27,11 +27,6 @@ This application is available on [Docker Hub](https://hub.docker.com/r/kavehbc/m
     docker run -p 80:8501 kavehbc/market-analyzer
 
 Once you run it, you can open it in your browser on [http://127.0.0.1](http://127.0.0.1).
-
-> **Apple M1 Silicon - Arm64**
-> 
-> As of today (`30 May 2021`), this Docker Image is not compatible with `Apple M1 Silicon`.
-> Instead, the source code can be run using `conda` on `Rosetta 2`.
 
 ## GitHub Repo
 This project is open-source, and it is available on GitHub at [https://github.com/kavehbc/market-analyzer](https://github.com/kavehbc/market-analyzer).
