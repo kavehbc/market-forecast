@@ -2,9 +2,9 @@
 # docker save -o market-analyzer.tar kavehbc/market-analyzer
 # docker load --input market-analyzer.tar
 
-FROM python:3.8-buster
+FROM python:3.9-buster
 
-LABEL version="1.0.1"
+LABEL version="1.0.2"
 LABEL maintainer="Kaveh Bakhtiyari"
 LABEL url="http://bakhtiyari.com"
 LABEL vcs-url="https://github.com/kavehbc/market-analyzer"
