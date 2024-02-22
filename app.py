@@ -150,5 +150,11 @@ def main():
 if __name__ == '__main__':
     st.set_page_config(page_title="Market Forecast",
                        page_icon="💹",
-                       initial_sidebar_state="expanded")
+                       layout="wide",
+                       initial_sidebar_state="expanded",
+                       menu_items={
+                           'Get Help': 'https://github.com/kavehbc/market-analyzer',
+                           'Report a bug': "https://github.com/kavehbc/market-analyzer",
+                           'About': "# Cryptocurrency & Stock Market Forecast (Predictive AI)"
+                       })
     main()

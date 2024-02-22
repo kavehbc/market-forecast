@@ -1,32 +1,29 @@
 import streamlit as st
-import matplotlib.pyplot as plt
+from prophet.plot import plot_plotly, plot_components_plotly
 
 
 def plot_predictions(ui_params, model, prediction):
     if ui_params.model == "fbprophet":
-        model.plot(prediction)
-        plt.title("Prediction")
-        plt.xlabel("Date")
-        plt.ylabel(ui_params.price_column + " Price")
-        # plt.show()
-        st.pyplot(plt)
+        fig_forecast = plot_plotly(model, prediction)
+        st.plotly_chart(fig_forecast, use_container_width=True)
+
     elif ui_params.model == "neuralprophet":
-        plot = model.plot(prediction)
-        st.plotly_chart(plot)
+        fig_forecast = model.plot(prediction)
+        st.plotly_chart(fig_forecast, use_container_width=True)
 
 
 def plot_fbprophet_components(ui_params, model, prediction):
     if ui_params.model == "fbprophet":
-        fig_components = model.plot_components(prediction)
 
-        st.pyplot(fig_components)
+        fig_components = plot_components_plotly(model, prediction)
+        st.plotly_chart(fig_components, use_container_width=True)
 
     elif ui_params.model == "neuralprophet":
         fig_components = model.plot_components(prediction)
         fig_parameters = model.plot_parameters()
 
-        st.plotly_chart(fig_components)
+        st.plotly_chart(fig_components, use_container_width=True)
         if fig_parameters:
-            st.plotly_chart(fig_parameters)
+            st.plotly_chart(fig_parameters, use_container_width=True)
 
 
