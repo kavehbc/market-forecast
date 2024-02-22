@@ -1,7 +1,5 @@
 import streamlit as st
-import streamlit_tags as st_tags
 from libs.constants import *
-from libs.db import get_top_tickers
 from libs.dot_dict_class import DotDict
 
 
