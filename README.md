@@ -14,7 +14,7 @@ The data is extracted from Yahoo! Finance using the `yfinance` library.
 ## Demo
 You can access the demo version deployed on Streamlit server at:
 
-[https://stock-market.streamlit.app/](https://stock-market.streamlit.app/)
+[https://market-forecast.streamlit.app/](https://market-forecast.streamlit.app/)
 
 ## Run
 In order to run this tool, you must have Streamlit installed on your machine/environment:
