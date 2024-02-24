@@ -1,6 +1,6 @@
-# docker build --progress=plain --no-cache -t market-analyzer .
-# docker save -o market-analyzer.tar market-analyzer
-# docker load --input market-analyzer.tar
+# docker build --progress=plain --no-cache -t market-forecast .
+# docker save -o market-forecast.tar market-forecast
+# docker load --input market-forecast.tar
 
 FROM continuumio/miniconda3 AS build
 
@@ -35,8 +35,8 @@ FROM debian:buster AS runtime
 LABEL version="1.0.0"
 LABEL maintainer="Kaveh Bakhtiyari"
 LABEL url="http://bakhtiyari.com"
-LABEL vcs-url="https://github.com/kavehbc/market-analyzer"
-LABEL description="Cryptocurrency and Stocks Exchange Market Technical Analysis"
+LABEL vcs-url="https://github.com/kavehbc/market-forecast"
+LABEL description="Cryptocurrency and Stocks Exchange Market Forecast"
 
 # Copy /venv from the previous stage
 COPY --from=build /venv /venv

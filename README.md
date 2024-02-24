@@ -24,12 +24,12 @@ In order to run this tool, you must have Streamlit installed on your machine/env
 ## Run on Docker
 This application is available on [Docker Hub](https://hub.docker.com/r/kavehbc/market-analyzer), and it can be run directly using:
 
-    docker run -p 80:8501 kavehbc/market-analyzer
+    docker run -p 80:8501 kavehbc/market-forecast
 
 Once you run it, you can open it in your browser on [http://127.0.0.1](http://127.0.0.1).
 
 ## GitHub Repo
-This project is open-source, and it is available on GitHub at [https://github.com/kavehbc/market-analyzer](https://github.com/kavehbc/market-analyzer).
+This project is open-source, and it is available on GitHub at [https://github.com/kavehbc/market-forecast](https://github.com/kavehbc/market-analyzer).
 
 ## Usage Tracking
 ### User Hits/Views

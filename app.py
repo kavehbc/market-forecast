@@ -153,8 +153,8 @@ if __name__ == '__main__':
                        layout="wide",
                        initial_sidebar_state="expanded",
                        menu_items={
-                           'Get Help': 'https://github.com/kavehbc/market-analyzer',
-                           'Report a bug': "https://github.com/kavehbc/market-analyzer",
+                           'Get Help': 'https://github.com/kavehbc/market-forecast',
+                           'Report a bug': "https://github.com/kavehbc/market-forecast",
                            'About': "# Cryptocurrency & Stock Market Forecast (Predictive AI)"
                        })
     main()

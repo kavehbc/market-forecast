@@ -1,14 +1,14 @@
-# docker build --progress=plain --no-cache -t kavehbc/market-analyzer .
-# docker save -o market-analyzer.tar kavehbc/market-analyzer
-# docker load --input market-analyzer.tar
+# docker build --progress=plain --no-cache -t kavehbc/market-forecast .
+# docker save -o market-forecast.tar kavehbc/market-forecast
+# docker load --input market-forecast.tar
 
 FROM python:3.9-buster
 
 LABEL version="1.1.0"
 LABEL maintainer="Kaveh Bakhtiyari"
 LABEL url="http://bakhtiyari.com"
-LABEL vcs-url="https://github.com/kavehbc/market-analyzer"
-LABEL description="Cryptocurrency and Stocks Exchange Market Technical Analysis"
+LABEL vcs-url="https://github.com/kavehbc/market-forecast"
+LABEL description="Cryptocurrency and Stocks Exchange Market Forecast"
 
 WORKDIR /app
 COPY . .
