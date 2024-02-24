@@ -14,6 +14,7 @@ WORKDIR /app
 COPY . .
 
 # installing the requirements
+RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 EXPOSE 8501
