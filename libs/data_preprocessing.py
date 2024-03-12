@@ -1,6 +1,3 @@
-import streamlit as st
-
-
 def prepare_hisotry_for_fbprophet(ui_params, df_history):
     # data preparation
     df_history_prep = df_history.reset_index()
