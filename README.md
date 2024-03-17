@@ -41,7 +41,6 @@ Injection functions are managed inside `libs\injection.py`.
 
 ### Searched Tickers/Symbols
 The searched tickers are stored in `db\popular.json` file.
-This file is being used for the autocomplete feature on the ticker's text input field.
 The functions related to the data storage and retrieval are managed inside `libs\db.py`.
 
 This database is stored where the app is hosted, and it does not transmit these data elsewhere automatically.
