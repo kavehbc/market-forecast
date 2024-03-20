@@ -49,6 +49,8 @@ This database is stored where the app is hosted, and it does not transmit these 
 
 1. `Recommendation` section is removed since `yfinance` module can not decrypt data.
 
+## Screenshot
+![App Screenshot](screenshot/market-forecast.png "App Screenshot")
 
 ## Developer(s)
 Kaveh Bakhtiyari - [Website](http://bakhtiyari.com) | [Medium](https://medium.com/@bakhtiyari)
