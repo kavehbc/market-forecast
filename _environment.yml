@@ -4,13 +4,13 @@ channels:
   - conda-forge
   - anaconda
 dependencies:
-  - python=3.9
-  - numpy=1.23.5
-  - pandas=1.5.3
+  - python=3.11
+  - numpy>=1.23.5
+  - pandas>=1.5.3
   - pip
   - pip:
-      - prophet==1.1.5
-      - streamlit==1.31.1
+      - prophet>=1.1.5
+      - streamlit>=1.31.1
       - --find-links https://download.pytorch.org/whl/torch_stable.html
-      - neuralprophet==0.5.3
-      - yfinance==0.2.36
+      - neuralprophet>=0.5.3
+      - yfinance>=0.2.36

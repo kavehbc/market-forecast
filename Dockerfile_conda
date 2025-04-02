@@ -31,7 +31,7 @@ RUN /venv/bin/conda-unpack
 # RUN conda clean -a -y
 
 # The runtime-stage image
-FROM debian:buster AS runtime
+FROM debian:stable-slim AS runtime
 LABEL version="1.0.0"
 LABEL maintainer="Kaveh Bakhtiyari"
 LABEL url="http://bakhtiyari.com"
