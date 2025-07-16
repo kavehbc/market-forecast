@@ -36,17 +36,10 @@ def create_ui_params():
     elif st_crypto_stock == TICKER_TYPE[1]:
         df_tickers = tickers_to_df()
         STOCKS = df_tickers["ticker"].to_list()
-        st_ticker_name_list = st.sidebar.selectbox('Stock Symbol',
-                                                   options=STOCKS,
-                                                   accept_new_options=True
-                                                   )
-        st_ticker_name_list = [st_ticker_name_list]
-
-        if len(st_ticker_name_list) > 0:
-            st_ticker_name = st_ticker_name_list[0].upper()
-        else:
-            st_ticker_name = None
-
+        st_ticker_name = st.sidebar.selectbox('Stock Symbol',
+                                              options=STOCKS,
+                                              accept_new_options=True
+                                              ).upper()
         # st_ticker_name = st.sidebar.text_input("Stock Symbol", value="MSFT").upper()
         st.sidebar.caption("Add `.TO` for the symbol in TSX")
     st_period = st.sidebar.selectbox("Period (History)", options=list(PERIODS.keys()), index=7,
