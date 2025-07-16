@@ -32,8 +32,7 @@ def create_model(ui_params, data):
                           weekly_seasonality=ui_params.weekly_seasonality,
                           daily_seasonality=ui_params.daily_seasonality,
                           seasonality_mode=ui_params.seasonality_mode,
-                          n_forecasts=ui_params.future_days,
-                          num_hidden_layers=5)
+                          n_forecasts=ui_params.future_days)
 
         if ui_params.training_percentage < 1.0:
             validation_percentage = 1.0 - ui_params.training_percentage

@@ -13,4 +13,4 @@ dependencies:
       - streamlit>=1.31.1
       - --find-links https://download.pytorch.org/whl/torch_stable.html
       - neuralprophet>=0.5.3
-      - yfinance>=0.2.36
+      - yfinance>=0.2.58

@@ -4,7 +4,7 @@ from prophet.plot import add_changepoints_to_plot, plot_cross_validation_metric
 from matplotlib import pyplot as plt
 
 
-@st.cache_data(max_entries=50, ttl=900, show_spinner=False)
+# @st.cache_data(max_entries=50, ttl=900, show_spinner=False)
 def cross_validating(model, initial_days=730,
                      period_days=180, horizon_days=365):
     df_cv = cross_validation(model,

@@ -1,5 +1,6 @@
 import streamlit as st
 from libs.constants import *
+from libs.db import tickers_to_df
 from libs.dot_dict_class import DotDict
 
 
@@ -33,8 +34,12 @@ def create_ui_params():
             st_ticker_name = st_crypto_name + "-" + st_currency_name
 
     elif st_crypto_stock == TICKER_TYPE[1]:
-
-        st_ticker_name_list = st.sidebar.text_input('Stock Symbol')
+        df_tickers = tickers_to_df()
+        STOCKS = df_tickers["ticker"].to_list()
+        st_ticker_name_list = st.sidebar.selectbox('Stock Symbol',
+                                                   options=STOCKS,
+                                                   accept_new_options=True
+                                                   )
         st_ticker_name_list = [st_ticker_name_list]
 
         if len(st_ticker_name_list) > 0:
